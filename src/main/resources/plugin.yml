@@ -1,0 +1,4 @@
+main: com.example.craft.App
+name: demo
+version: 1.0-SNAPSHOT
+api-version: 1.20
