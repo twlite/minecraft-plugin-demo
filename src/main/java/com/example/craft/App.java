@@ -1,6 +1,9 @@
 package com.example.craft;
 
 import com.example.craft.listeners.EntitySpawnHandler;
+import com.example.craft.listeners.PlayerEventHandler;
+
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 /**
@@ -13,7 +16,10 @@ public class App extends JavaPlugin {
      */
     public void onEnable() {
         getLogger().info("Demo plugin has started!");
-        getServer().getPluginManager().registerEvents(new EntitySpawnHandler(), this);
+        PluginManager pluginManager = getServer().getPluginManager();
+
+        pluginManager.registerEvents(new EntitySpawnHandler(), this);
+        pluginManager.registerEvents(new PlayerEventHandler(), this);
     }
 
     @Override

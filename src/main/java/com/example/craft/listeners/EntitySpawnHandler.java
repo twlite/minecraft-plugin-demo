@@ -19,9 +19,8 @@ import org.bukkit.inventory.ItemStack;
  * CreeperSpawn.
  */
 public class EntitySpawnHandler implements Listener {
-    private float chargedCreeperChance = 0.2f;
-    private int chargedCreeperDropAmount = 20;
-    private int chargedCreeperDropAmountWithLooting = 30;
+    private int chargedCreeperDropAmount = 10;
+    private int chargedCreeperDropAmountWithLooting = 15;
 
     /**
      * Called when a creeper spawns.
@@ -33,8 +32,10 @@ public class EntitySpawnHandler implements Listener {
         if (type == EntityType.CREEPER) {
             Creeper creeper = (Creeper) event.getEntity();
 
+            boolean shouldSpawnChargedCreeper = Math.floor(Math.random() * (double) 1000) < 50;
+
             // This RNG is not very good, but it's good enough for this purpose.
-            if (Math.random() < chargedCreeperChance) {
+            if (shouldSpawnChargedCreeper) {
                 creeper.setPowered(true);
             }
         }
@@ -72,6 +73,7 @@ public class EntitySpawnHandler implements Listener {
         if (player == null) {
             return;
         }
+
         Material block = (Material) event.getBlock().getType();
         ItemStack itemInUse = player.getInventory().getItemInMainHand();
 
