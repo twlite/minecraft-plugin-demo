@@ -77,10 +77,7 @@ public class EntitySpawnHandler implements Listener {
         Material block = (Material) event.getBlock().getType();
         ItemStack itemInUse = player.getInventory().getItemInMainHand();
 
-        if (block == Material.SPAWNER && isPickaxe(itemInUse.getType())) {
-            if (itemInUse.getEnchantmentLevel(Enchantment.SILK_TOUCH) < 1) {
-                return;
-            }
+        if (block == Material.SPAWNER && itemInUse.getEnchantmentLevel(Enchantment.SILK_TOUCH) > 0) {
             CreatureSpawner spawner = (CreatureSpawner) event.getBlock().getState();
             EntityType entityType = spawner.getSpawnedType();
             Material egg = getEgg(entityType);
@@ -144,19 +141,6 @@ public class EntitySpawnHandler implements Listener {
                 return Material.MAGMA_CUBE_SPAWN_EGG;
             default:
                 return null;
-        }
-    }
-
-    /**
-     * Returns true if the given material is a pickaxe.
-     */
-    private boolean isPickaxe(Material material) {
-        switch (material) {
-            case DIAMOND_PICKAXE:
-            case NETHERITE_PICKAXE:
-                return true;
-            default:
-                return false;
         }
     }
 }
