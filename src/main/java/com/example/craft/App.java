@@ -2,6 +2,7 @@ package com.example.craft;
 
 import com.example.craft.listeners.EntitySpawnHandler;
 import com.example.craft.listeners.PlayerEventHandler;
+import com.example.craft.commands.CatRaveCommand;
 
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -20,6 +21,9 @@ public class App extends JavaPlugin {
 
         pluginManager.registerEvents(new EntitySpawnHandler(), this);
         pluginManager.registerEvents(new PlayerEventHandler(), this);
+
+        // Register commands
+        this.getCommand("catrave").setExecutor(new CatRaveCommand(this));
     }
 
     @Override
