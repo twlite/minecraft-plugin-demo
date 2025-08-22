@@ -3,11 +3,13 @@ package com.example.craft.listeners;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Creeper;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerToggleSneakEvent;
 import org.bukkit.inventory.ItemStack;
 
 /**
@@ -36,6 +38,22 @@ public class PlayerEventHandler implements Listener {
 
         player.sendMessage("§cYou died at " + (int) (location.getX()) + " " + (int) (location.getY()) + " "
                 + (int) (location.getZ()) + "!");
+    }
+
+    @EventHandler
+    public void onPlayerToggleSneak(PlayerToggleSneakEvent event) {
+        if (event.isSneaking()) {
+            Player player = event.getPlayer();
+            Location playerLocation = player.getLocation();
+
+            Location spawnLocation = playerLocation.clone().subtract(
+                    playerLocation.getDirection().multiply(2));
+
+            Creeper creeper = player.getWorld().spawn(spawnLocation, Creeper.class);
+            creeper.setExplosionRadius(3);
+
+            player.sendMessage("§aA creeper has appeared behind you!");
+        }
     }
 
     private boolean hasLooting(ItemStack item) {

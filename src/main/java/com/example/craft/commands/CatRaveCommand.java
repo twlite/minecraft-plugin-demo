@@ -64,7 +64,7 @@ public class CatRaveCommand implements CommandExecutor {
 
                 // Very fast spin cycle
                 if (elapsedSeconds >= 1 && elapsedSeconds < 3) {
-                    spinCat(VERY_FAST_SPEED, true);
+                    spinCat(cat, VERY_FAST_SPEED, true);
                 }
                 // Pause between cycles
                 else if (elapsedSeconds >= 3 && elapsedSeconds < 5) {
@@ -72,7 +72,7 @@ public class CatRaveCommand implements CommandExecutor {
                 }
                 // Fast spin cycle
                 else if (elapsedSeconds >= 5 && elapsedSeconds < 7) {
-                    spinCat(FAST_SPEED, true);
+                    spinCat(cat, FAST_SPEED, true);
                 }
                 // Pause between cycles
                 else if (elapsedSeconds >= 7 && elapsedSeconds < 8) {
@@ -80,11 +80,11 @@ public class CatRaveCommand implements CommandExecutor {
                 }
                 // Normal spin cycle
                 else if (elapsedSeconds >= 8 && elapsedSeconds < 10) {
-                    spinCat(NORMAL_SPEED, false);
+                    spinCat(cat, NORMAL_SPEED, false);
                 }
             }
 
-            private void spinCat(double speed, boolean withPitch) {
+            private void spinCat(Cat cat, double speed, boolean withPitch) {
                 yaw = (yaw + (float) speed) % 360;
                 if (withPitch) {
                     pitch = (pitch + (float) (speed / 2)) % 360;
